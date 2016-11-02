@@ -1,0 +1,19 @@
+CREATE TABLE company(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE user(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    company_id BIGINT NOT NULL,
+    FOREIGN KEY (company_id) REFERENCES company(id)
+);
+
+CREATE TABLE todo(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    text VARCHAR(255) NOT NULL,
+    user_id BIGINT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(id)
+);
