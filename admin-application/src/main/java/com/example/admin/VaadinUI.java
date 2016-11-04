@@ -37,7 +37,7 @@ public class VaadinUI extends UI implements GridBasedCrudComponent.GridCrudListe
     }
 
     @Override
-    public Collection<Company> refreshTable() {
+    public Collection<Company> findAll() {
         return companyService.list().getContent();
     }
 

@@ -24,6 +24,13 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>vaadin-addons</id>
+            <url>http://maven.vaadin.com/vaadin-addons</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -53,7 +60,7 @@
         <dependency>
             <groupId>org.vaadin.crudui</groupId>
             <artifactId>crudui</artifactId>
-            <version>1.0</version>
+            <version>1.1</version>
         </dependency>
 
         <dependency>
