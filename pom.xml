@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>eureka-server</module>
+        <module>discovery-server</module>
         <module>biz-application</module>
         <module>admin-application</module>
     </modules>
