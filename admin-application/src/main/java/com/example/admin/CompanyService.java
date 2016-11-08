@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface CompanyService {
 
     @RequestMapping
-    Resources<Company> list();
+    Resources<Company> findAll();
 
     @RequestMapping(method = RequestMethod.POST)
     void add(@RequestBody Company company);

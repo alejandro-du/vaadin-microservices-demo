@@ -9,11 +9,9 @@ import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.crudui.impl.crud.GridBasedCrudComponent;
 
-import java.util.Collection;
-
 @SpringUI
 @Theme(ValoTheme.THEME_NAME)
-public class VaadinUI extends UI implements GridBasedCrudComponent.GridCrudListener<Company> {
+public class VaadinUI extends UI {
 
     private final CompanyService companyService;
 
@@ -24,36 +22,20 @@ public class VaadinUI extends UI implements GridBasedCrudComponent.GridCrudListe
 
     @Override
     protected void init(VaadinRequest request) {
-        GridBasedCrudComponent companiesCrud = new GridBasedCrudComponent<>(Company.class, this);
-        companiesCrud.showAllOptions();
-        companiesCrud.setNewFormVisiblePropertyIds("name");
-        companiesCrud.setEditFormDisabledPropertyIds("id");
+        GridBasedCrudComponent<Company> crud = new GridBasedCrudComponent<>(Company.class);
+        crud.setNewFormVisiblePropertyIds("name");
+        crud.setEditFormDisabledPropertyIds("id");
+        crud.setOperations(
+                company -> companyService.add(company),
+                company -> companyService.update(company.getId(), company),
+                company -> companyService.delete(company.getId()),
+                () -> companyService.findAll().getContent());
 
-        HorizontalLayout mainLayout = new HorizontalLayout(companiesCrud);
+        HorizontalLayout mainLayout = new HorizontalLayout(crud);
         mainLayout.setSizeFull();
         mainLayout.setMargin(true);
         mainLayout.setSpacing(true);
         setContent(mainLayout);
-    }
-
-    @Override
-    public Collection<Company> findAll() {
-        return companyService.list().getContent();
-    }
-
-    @Override
-    public void add(Company company) {
-        companyService.add(company);
-    }
-
-    @Override
-    public void update(Company company) {
-        companyService.update(company.getId(), company);
-    }
-
-    @Override
-    public void delete(Company company) {
-        companyService.delete(company.getId());
     }
 
 }
