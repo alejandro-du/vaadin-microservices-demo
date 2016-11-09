@@ -23,7 +23,7 @@ public class VaadinUI extends UI {
     @Override
     protected void init(VaadinRequest request) {
         GridBasedCrudComponent<Company> crud = new GridBasedCrudComponent<>(Company.class);
-        crud.setNewFormVisiblePropertyIds("name");
+        crud.setAddFormVisiblePropertyIds("name");
         crud.setEditFormDisabledPropertyIds("id");
         crud.setOperations(
                 company -> companyService.add(company),
