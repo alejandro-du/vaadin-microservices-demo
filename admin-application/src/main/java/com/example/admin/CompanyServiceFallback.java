@@ -12,26 +12,22 @@ import java.util.Collections;
 @Service
 public class CompanyServiceFallback implements CompanyService {
 
-    public static final String ERROR_MESSAGE = "Cannot connect to biz-application. Please try again later.";
-
     @Override
     public Resources<Company> findAll() {
+        Notification.show("Cannot connect to biz-application. Please try again later.", Notification.Type.ERROR_MESSAGE);
         return new Resources<Company>(Collections.emptyList());
     }
 
     @Override
     public void add(Company company) {
-        Notification.show(ERROR_MESSAGE, Notification.Type.ERROR_MESSAGE);
     }
 
     @Override
     public void update(Long id, Company company) {
-        Notification.show(ERROR_MESSAGE, Notification.Type.ERROR_MESSAGE);
     }
 
     @Override
     public void delete(Long id) {
-        Notification.show(ERROR_MESSAGE, Notification.Type.ERROR_MESSAGE);
     }
 
 }
