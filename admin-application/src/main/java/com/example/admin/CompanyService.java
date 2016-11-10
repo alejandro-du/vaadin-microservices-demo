@@ -1,6 +1,5 @@
 package com.example.admin;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.hateoas.Resources;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface CompanyService {
 
     @RequestMapping("/companies")
-    @Cacheable("companies")
     Resources<Company> findAll();
 
     @RequestMapping(value = "/companies", method = RequestMethod.POST)

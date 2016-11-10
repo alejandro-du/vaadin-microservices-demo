@@ -15,7 +15,7 @@ public class CompanyServiceFallback implements CompanyService {
     @Override
     public Resources<Company> findAll() {
         Notification.show("Cannot connect to biz-application. Please try again later.", Notification.Type.ERROR_MESSAGE);
-        return new Resources<Company>(Collections.emptyList());
+        return new Resources<>(Collections.emptyList());
     }
 
     @Override
