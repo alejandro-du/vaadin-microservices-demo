@@ -3,7 +3,6 @@ package com.example.admin;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,7 @@ public class VaadinUI extends UI {
     @Override
     protected void init(VaadinRequest request) {
         GridBasedCrudComponent<Company> crud = new GridBasedCrudComponent<>(Company.class);
+        crud.getGrid().setColumns("name", "phone", "email", "address");
         crud.getCrudFormFactory().setVisiblePropertyIds("name", "phone", "email", "address");
         crud.setOperations(
                 () -> companyService.findAll().getContent(),
@@ -31,11 +31,7 @@ public class VaadinUI extends UI {
                 company -> companyService.delete(company.getId())
         );
 
-        HorizontalLayout mainLayout = new HorizontalLayout(crud);
-        mainLayout.setSizeFull();
-        mainLayout.setMargin(true);
-        mainLayout.setSpacing(true);
-        setContent(mainLayout);
+        setContent(crud);
     }
 
 }
