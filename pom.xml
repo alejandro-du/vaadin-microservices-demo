@@ -10,9 +10,9 @@
 
     <modules>
         <module>discovery-server</module>
-        <module>proxy-server</module>
         <module>biz-application</module>
         <module>admin-application</module>
+        <module>proxy-server</module>
     </modules>
 
 </project>
