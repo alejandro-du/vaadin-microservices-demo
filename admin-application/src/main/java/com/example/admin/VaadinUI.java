@@ -34,8 +34,4 @@ public class VaadinUI extends UI {
         setContent(crud);
     }
 
-    public void showFallBackMessage() {
-
-    }
-
 }
