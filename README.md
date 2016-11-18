@@ -63,11 +63,11 @@ The `admin-application `(implemented with Vaadin) will delegate the CRUD operati
 
 You can horizontally scale the system by starting more instances of the `biz-application` and `admin-application` microservices. Remember to specify different ports (using `-Dserver.port=NNNN`) when starting new instances.
 
-**4) Test the resilience of the system.**
+**4) Test system resilience.**
 
 Stop all the instances of the `biz-application` microservice to see the fallback mechanisim, implemented with Netflix Hystrix.
 
-Stop one of the `admin-application` instances that you are sure is in use to see an error message ("Server not available"). If there are more instances of the `admin-application`, you should be able to refresh the browser and get the connection to a different instance after some seconds/minutes.
+Stop one of the `admin-application` instances that you are sure is in use, and see the error message ("Server not available"). If there are more instances of the `admin-application`, you should be able to refresh the browser and get the connection to a different instance after some seconds/minutes.
 
 ## Implementing the demo
 
