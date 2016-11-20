@@ -25,7 +25,9 @@ public class StickySessionRule extends ClientConfigEnabledRoundRobinRule {
         if (cookie.isPresent()) {
             Cookie hash = cookie.get();
             List<Server> servers = getLoadBalancer().getReachableServers();
-            Optional<Server> serverFound = servers.stream().filter(s -> hash.getValue().equals("" + s.hashCode())).findFirst();
+            Optional<Server> serverFound = servers.stream()
+                    .filter(s -> hash.getValue().equals("" + s.hashCode()))
+                    .findFirst();
 
             if (serverFound.isPresent()) {
                 return serverFound.get();
