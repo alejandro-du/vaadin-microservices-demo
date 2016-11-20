@@ -14,10 +14,10 @@ public interface CompanyService {
     Resources<Company> findAll();
 
     @RequestMapping(value = "/companies", method = RequestMethod.POST)
-    void add(@RequestBody Company company);
+    Company add(@RequestBody Company company);
 
     @RequestMapping(value = "/companies/{id}", method = RequestMethod.PUT)
-    void update(@PathVariable("id") Long id, @RequestBody Company company);
+    Company update(@PathVariable("id") Long id, @RequestBody Company company);
 
     @RequestMapping(value = "/companies/{id}", method = RequestMethod.DELETE)
     void delete(@PathVariable("id") Long id);

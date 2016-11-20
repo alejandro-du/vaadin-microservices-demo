@@ -20,11 +20,13 @@ public class CompanyServiceFallback implements CompanyService {
     }
 
     @Override
-    public void add(Company company) {
+    public Company add(Company company) {
+        return null;
     }
 
     @Override
-    public void update(Long id, Company company) {
+    public Company update(Long id, Company company) {
+        return null;
     }
 
     @Override
