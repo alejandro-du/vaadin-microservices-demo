@@ -6,6 +6,8 @@ import com.netflix.zuul.context.RequestContext;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,7 @@ public class StickySessionRule extends ClientConfigEnabledRoundRobinRule {
 
     @Override
     public Server choose(Object key) {
+
         Optional<Cookie> cookie = getCookie();
 
         if (cookie.isPresent()) {
@@ -38,11 +41,14 @@ public class StickySessionRule extends ClientConfigEnabledRoundRobinRule {
     }
 
     private Optional<Cookie> getCookie() {
-        Cookie[] cookies = RequestContext.getCurrentContext().getRequest().getCookies();
-        if (cookies != null) {
-            return Arrays.stream(cookies)
-                    .filter(c -> c.getName().equals(COOKIE_NAME))
-                    .findFirst();
+        HttpServletRequest request = RequestContext.getCurrentContext().getRequest();
+        if (request != null) {
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                return Arrays.stream(cookies)
+                        .filter(c -> c.getName().equals(COOKIE_NAME))
+                        .findFirst();
+            }
         }
 
         return Optional.empty();
@@ -50,9 +56,12 @@ public class StickySessionRule extends ClientConfigEnabledRoundRobinRule {
 
     private Server addServer(Object key) {
         Server server = super.choose(key);
-        Cookie newCookie = new Cookie(COOKIE_NAME, "" + server.hashCode());
-        newCookie.setPath("/");
-        RequestContext.getCurrentContext().getResponse().addCookie(newCookie);
+        HttpServletResponse response = RequestContext.getCurrentContext().getResponse();
+        if (response != null) {
+            Cookie newCookie = new Cookie(COOKIE_NAME, "" + server.hashCode());
+            newCookie.setPath("/");
+            response.addCookie(newCookie);
+        }
         return server;
     }
 
