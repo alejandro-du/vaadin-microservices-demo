@@ -15,19 +15,13 @@ mvn package
 
 Use multiple (six) terminals to perform the following steps:
 
-**1) Start the `discovery-server` application:**
+**1) Start the `discovery-server` application (Eureka app):**
 ```
 cd vaadin-microservices-demo/discovery-server
 java -jar target/discovery-server-0.0.1-SNAPSHOT.jar
 ```
 
-**2) Start the `proxy-server` application:**
-```
-cd vaadin-microservices-demo/proxy-server
-java -jar target/proxy-server-0.0.1-SNAPSHOT.jar
-```
-
-**3) Start two instances of the `biz-application` microservice (REST app):**
+**2) Start two instances of the `biz-application` microservice (REST app):**
 ```
 cd vaadin-microservices-demo/biz-application
 java -jar target/biz-application-0.0.1-SNAPSHOT.jar
@@ -37,7 +31,7 @@ cd vaadin-microservices-demo/biz-application
 java -Dserver.port=8002 -jar target/biz-application-0.0.1-SNAPSHOT.jar
 ```
 
-**4) Start two instances of the `admin-application` microservice (Vaadin app):**
+**3) Start two instances of the `admin-application` microservice (Vaadin app):**
 ```
 cd vaadin-microservices-demo/admin-application
 java -jar target/admin-application-0.0.1-SNAPSHOT.jar
@@ -47,11 +41,17 @@ cd vaadin-microservices-demo/admin-application
 java -Dserver.port=8003 -jar target/admin-application-0.0.1-SNAPSHOT.jar
 ```
 
+**4) Start the `proxy-server` application (Zuul app):**
+```
+cd vaadin-microservices-demo/proxy-server
+java -jar target/proxy-server-0.0.1-SNAPSHOT.jar
+```
+
 ## Using the demo
 
 **1) Point your browser to <http://localhost:8080>.**
 
-This is the "edge service" implemented with Netflix Zuul. It acts as a reverse proxy, redirecting requests to the `addmin-application` instances using a load balancer provided by Netflix Ribbon and a custom sticky session rule.
+This is the "edge service" implemented with Netflix Zuul. It acts as a reverse proxy, redirecting requests to the `admin-application` instances using a load balancer provided by Netflix Ribbon and a custom sticky session rule.
 
 If you get a "Server not available" message, please wait until all the services are registered with the `discovery-server` (implemented with Netflix Eureka).
 
