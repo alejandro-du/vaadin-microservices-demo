@@ -10,6 +10,8 @@ public class VaadinUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
+        getReconnectDialogConfiguration().setDialogText("Please wait...");
+        getReconnectDialogConfiguration().setReconnectInterval(1000);
         GridCrud<Company> crud = new GridCrud<>(Company.class);
         crud.getGrid().setColumns("name", "phone", "email", "address");
         crud.getCrudFormFactory().setVisibleProperties("name", "phone", "email", "address");
