@@ -8,22 +8,16 @@ import org.vaadin.crudui.crud.impl.GridCrud;
 @SpringUI
 public class VaadinUI extends UI {
 
-    private final CompanyService companyService;
-
-    public VaadinUI(CompanyService companyService) {
-        this.companyService = companyService;
-    }
-
     @Override
     protected void init(VaadinRequest request) {
         GridCrud<Company> crud = new GridCrud<>(Company.class);
         crud.getGrid().setColumns("name", "phone", "email", "address");
         crud.getCrudFormFactory().setVisibleProperties("name", "phone", "email", "address");
         crud.setOperations(
-                () -> companyService.findAll().getContent(),
-                company -> companyService.add(company),
-                company -> companyService.update(company.getId(), company),
-                company -> companyService.delete(company.getId())
+                () -> Services.getCompanyService().findAll().getContent(),
+                company -> Services.getCompanyService().add(company),
+                company -> Services.getCompanyService().update(company.getId(), company),
+                company -> Services.getCompanyService().delete(company.getId())
         );
 
         setContent(crud);
