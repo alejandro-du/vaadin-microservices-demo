@@ -15,6 +15,7 @@ public class VaadinUI extends UI {
         GridCrud<Company> crud = new GridCrud<>(Company.class);
         crud.getGrid().setColumns("name", "phone", "email", "address");
         crud.getCrudFormFactory().setVisibleProperties("name", "phone", "email", "address");
+        crud.getCrudFormFactory().setUseBeanValidation(true);
         crud.setOperations(
                 () -> Services.getCompanyService().findAll().getContent(),
                 company -> Services.getCompanyService().add(company),

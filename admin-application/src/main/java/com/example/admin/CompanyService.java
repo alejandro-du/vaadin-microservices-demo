@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "biz-application", fallback = CompanyServiceFallback.class)
+@FeignClient(value = "${biz-application.name:null}", url="${biz-application.url:}", fallback = CompanyServiceFallback.class)
 @Primary
 public interface CompanyService {
 

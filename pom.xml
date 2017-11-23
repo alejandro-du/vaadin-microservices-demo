@@ -10,6 +10,7 @@
 
     <modules>
         <module>discovery-server</module>
+        <module>config-server</module>
         <module>biz-application</module>
         <module>admin-application</module>
         <module>proxy-server</module>
