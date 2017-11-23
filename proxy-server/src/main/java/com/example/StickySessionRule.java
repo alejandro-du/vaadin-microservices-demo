@@ -22,22 +22,33 @@ public class StickySessionRule extends ClientConfigEnabledRoundRobinRule {
 
     @Override
     public Server choose(Object key) {
-
         Optional<Cookie> cookie = getCookie();
 
         if (cookie.isPresent()) {
             Cookie hash = cookie.get();
             List<Server> servers = getLoadBalancer().getReachableServers();
-            Optional<Server> serverFound = servers.stream()
+            Optional<Server> server = servers.stream()
+                    .filter(s -> s.isAlive() && s.isReadyToServe())
                     .filter(s -> hash.getValue().equals("" + s.hashCode()))
                     .findFirst();
 
-            if (serverFound.isPresent()) {
-                return serverFound.get();
+            if (server.isPresent()) {
+                return server.get();
             }
         }
 
-        return addServer(key);
+        return useNewServer(key);
+    }
+
+    private Server useNewServer(Object key) {
+        Server server = super.choose(key);
+        HttpServletResponse response = RequestContext.getCurrentContext().getResponse();
+        if (response != null) {
+            Cookie newCookie = new Cookie(COOKIE_NAME, "" + server.hashCode());
+            newCookie.setPath("/");
+            response.addCookie(newCookie);
+        }
+        return server;
     }
 
     private Optional<Cookie> getCookie() {
@@ -52,17 +63,6 @@ public class StickySessionRule extends ClientConfigEnabledRoundRobinRule {
         }
 
         return Optional.empty();
-    }
-
-    private Server addServer(Object key) {
-        Server server = super.choose(key);
-        HttpServletResponse response = RequestContext.getCurrentContext().getResponse();
-        if (response != null) {
-            Cookie newCookie = new Cookie(COOKIE_NAME, "" + server.hashCode());
-            newCookie.setPath("/");
-            response.addCookie(newCookie);
-        }
-        return server;
     }
 
 }
