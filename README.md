@@ -74,14 +74,14 @@ You can horizontally scale the system by starting more instances of the `biz-app
 Refresh the browser to generate some log output. Check the logs in the `admin-application` instances to find the instance currently serving the webapp and kill the process.
 Go back to the browser and click a row in the Grid. You'll see a "Please wait..." message and after awhile you should be able to continue using the webapp without losing the state thanks to the externalized HTTP Session with Spring Session and Hazelcast.
 
-**5 Test system resilience.**
+**5) Test system resilience.**
 
 Stop all the instances of the `biz-application` microservice to see the fallback mechanism (implemented with Netflix Hystrix).
 
 ## Developing
 
-You don't need to have all the infrastructure services running (`discovery-server`, `config-server`, and `proxy-server`) in order to develop one of the microservices (`biz-application`, `admin-application`).
-Activate the `development` Spring profile to use a local configuration (`application-development.properties) that excludes external orchestration services.
+You don't need to have all the infrastructure services running (`discovery-server`, `config-server`, and `proxy-server`) in order to develop individual microservices (`biz-application`, `admin-application`).
+Activate the `development` Spring profile to use a local configuration (`application-development.properties`) that excludes external orchestration services.
 
 To develop the `biz-application` microservice you can run:
   
@@ -91,4 +91,4 @@ cd vaadin-microservices-demo/biz-application
 java -Dspring.profiles.active=development -jar target/biz-application-0.0.1-SNAPSHOT.jar
 ```
 
-The `admin-application` needs a the REST web-service provided by the `biz-application`. You can either, run the `biz-application` in `development` mode or create a _mock_ REST web service. You can configure the end point with the `biz-application.url` property in the `application-development.properties` file of the `admin-application` microservice.
+To developt the `admin-application` you need the REST web-service provided by the `biz-application`. You can either, run the `biz-application` in `development` mode or create a _mock_ REST web service. You can configure the end point with the `biz-application.url` property in the `application-development.properties` file of the `admin-application` microservice.
