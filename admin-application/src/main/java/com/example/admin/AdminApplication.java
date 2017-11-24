@@ -7,6 +7,7 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.vaadin.spring.annotation.EnableVaadin;
 import com.vaadin.spring.server.SpringVaadinServlet;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -26,6 +27,9 @@ import org.springframework.session.hazelcast.config.annotation.web.http.EnableHa
 @EnableHazelcastHttpSession
 public class AdminApplication {
 
+    @Value("${hazelcast.max.no.heartbeat.seconds}")
+    private String hazelcastHearbeat;
+
     public static void main(String... args) {
         SpringApplication.run(AdminApplication.class, args);
     }
@@ -44,7 +48,8 @@ public class AdminApplication {
                 .setExtractor(PrincipalNameExtractor.class.getName());
 
         Config config = new Config();
-        config.getMapConfig("spring:session:sessions")
+        config.setProperty("hazelcast.max.no.heartbeat.seconds", hazelcastHearbeat)
+                .getMapConfig("spring:session:sessions")
                 .addMapAttributeConfig(attributeConfig)
                 .addMapIndexConfig(new MapIndexConfig(HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE, false));
 
