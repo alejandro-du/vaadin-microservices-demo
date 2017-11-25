@@ -28,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 @EnableHazelcastHttpSession
 public class NewsApplication {
 
-    @Value("${hazelcast.max.no.heartbeat.seconds}")
+    @Value("${hazelcast.max.no.heartbeat.seconds:60}")
     private String hazelcastHearbeat;
 
     public static void main(String[] args) {

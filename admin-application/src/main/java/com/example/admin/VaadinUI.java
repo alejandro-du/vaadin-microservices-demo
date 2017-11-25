@@ -6,11 +6,16 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import org.vaadin.crudui.crud.CrudListener;
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.layout.impl.VerticalCrudLayout;
 
+import java.util.Collection;
+
 @SpringUI
-public class VaadinUI extends UI {
+public class VaadinUI extends UI implements CrudListener<Company> {
+
+    private GridCrud<Company> crud = new GridCrud<>(Company.class, new VerticalCrudLayout());
 
     @Override
     protected void init(VaadinRequest request) {
@@ -20,24 +25,40 @@ public class VaadinUI extends UI {
         Label title = new Label("Companies");
         title.addStyleName(ValoTheme.LABEL_H2);
 
-        GridCrud<Company> crud = new GridCrud<>(Company.class, new VerticalCrudLayout());
-        crud.getGrid().setHeightByRows(5);
         crud.getGrid().setColumns("name", "twitterUsername");
+        crud.getGrid().setHeightByRows(Services.getCompanyService().findAll().getContent().size());
         crud.getCrudFormFactory().setVisibleProperties("name", "twitterUsername");
         crud.getCrudFormFactory().setUseBeanValidation(true);
         crud.setClickRowToUpdate(true);
         crud.setUpdateOperationVisible(false);
-        crud.setOperations(
-                () -> Services.getCompanyService().findAll().getContent(),
-                company -> Services.getCompanyService().add(company),
-                company -> Services.getCompanyService().update(company.getId(), company),
-                company -> Services.getCompanyService().delete(company.getId())
-        );
+        crud.setCrudListener(this);
 
         VerticalLayout mainLayout = new VerticalLayout(title, crud);
         mainLayout.setHeightUndefined();
         mainLayout.setMargin(false);
         setContent(mainLayout);
+    }
+
+    @Override
+    public Collection<Company> findAll() {
+        Collection<Company> companies = Services.getCompanyService().findAll().getContent();
+        crud.getGrid().setHeightByRows(5);
+        return companies;
+    }
+
+    @Override
+    public Company add(Company company) {
+        return Services.getCompanyService().add(company);
+    }
+
+    @Override
+    public Company update(Company company) {
+        return Services.getCompanyService().update(company.getId(), company);
+    }
+
+    @Override
+    public void delete(Company company) {
+        Services.getCompanyService().delete(company.getId());
     }
 
 }
