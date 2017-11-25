@@ -22,6 +22,7 @@ public class VaadinUI extends UI {
         admin.setSizeFull();
 
         HorizontalSplitPanel mainLayout = new HorizontalSplitPanel(admin, news);
+        mainLayout.setSplitPosition(30);
         mainLayout.setSizeFull();
 
         setContent(mainLayout);

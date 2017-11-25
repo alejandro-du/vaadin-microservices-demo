@@ -14,8 +14,7 @@ public class CompanyServiceFallback implements CompanyService {
 
     @Override
     public Resources<Company> findAll() {
-        Notification.show("Operation not available. Please try again later.",
-                Notification.Type.ERROR_MESSAGE);
+        Notification.show("Operation not available. Please try again later.", Notification.Type.ERROR_MESSAGE);
         return new Resources<>(Collections.emptyList());
     }
 

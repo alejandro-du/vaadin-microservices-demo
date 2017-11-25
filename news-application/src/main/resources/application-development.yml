@@ -5,3 +5,14 @@ spring.cloud.config.enabled: false
 eureka.client:
     registerWithEureka: false
     fetchRegistry: false
+
+ribbon:
+  serverListRefreshInterval: 1000
+  ConnectTimeout: 6000
+  ReadTimeout: 3000
+
+hystrix.commanddefault.execution.isolation.thread.timeoutInMilliseconds: 10000
+
+feign.hystrix.enabled: true
+
+biz-application.url: http://localhost:9601

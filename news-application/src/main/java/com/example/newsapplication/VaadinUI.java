@@ -2,19 +2,35 @@ package com.example.newsapplication;
 
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.UI;
+import org.springframework.hateoas.Resources;
 import org.vaadin.addon.twitter.Timeline;
 
 /**
  * @author Alejandro Duarte.
  */
-@SpringUI()
+@SpringUI
 public class VaadinUI extends UI {
+
+    private final CompanyService companyService;
+
+    public VaadinUI(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
     @Override
     protected void init(VaadinRequest request) {
-        Timeline timeline = Timeline.profile("vaadin");
-        setContent(timeline);
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.setWidth("100%");
+        horizontalLayout.setSpacing(false);
+        setContent(horizontalLayout);
+
+        Resources<Company> companies = companyService.findAll();
+        companies.getContent().stream()
+                .map(company -> company.getTwitterUsername())
+                .map(twitterUsername -> Timeline.profile(twitterUsername))
+                .forEach(horizontalLayout::addComponent);
     }
 
 }

@@ -5,7 +5,6 @@ import com.hazelcast.config.MapAttributeConfig;
 import com.hazelcast.config.MapIndexConfig;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.vaadin.spring.annotation.EnableVaadin;
 import com.vaadin.spring.server.SpringVaadinServlet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -23,7 +22,6 @@ import org.springframework.session.web.http.DefaultCookieSerializer;
 import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootApplication
-@EnableVaadin
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
