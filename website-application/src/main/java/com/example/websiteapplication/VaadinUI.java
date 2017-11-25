@@ -15,6 +15,9 @@ public class VaadinUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
+        getReconnectDialogConfiguration().setDialogText("Please wait...");
+        getReconnectDialogConfiguration().setReconnectInterval(1000);
+
         BrowserFrame news = new BrowserFrame("News", new ExternalResource("http://localhost:8080/news"));
         news.setSizeFull();
 

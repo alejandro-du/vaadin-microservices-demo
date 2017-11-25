@@ -52,7 +52,7 @@ public class AdminApplication {
 
         Config config = new Config();
         config.setProperty("hazelcast.max.no.heartbeat.seconds", hazelcastHearbeat)
-                .getMapConfig("spring:session:sessions")
+                .getMapConfig("spring:session:sessions:admin-application")
                 .addMapAttributeConfig(attributeConfig)
                 .addMapIndexConfig(new MapIndexConfig(HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE, false));
 

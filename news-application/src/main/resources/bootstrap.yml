@@ -1,5 +1,4 @@
 server.port: 8080
-server.session.cookie.name: NEWS-SESSION
 
 spring.application.name: news-application
 

@@ -5,3 +5,5 @@ spring.cloud.config.enabled: false
 eureka.client:
     registerWithEureka: false
     fetchRegistry: false
+
+hazelcast.max.no.heartbeat.seconds: 60

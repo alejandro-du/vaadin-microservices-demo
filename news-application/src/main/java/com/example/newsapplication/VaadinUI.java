@@ -13,20 +13,17 @@ import org.vaadin.addon.twitter.Timeline;
 @SpringUI
 public class VaadinUI extends UI {
 
-    private final CompanyService companyService;
-
-    public VaadinUI(CompanyService companyService) {
-        this.companyService = companyService;
-    }
-
     @Override
     protected void init(VaadinRequest request) {
+        getReconnectDialogConfiguration().setDialogText("Please wait...");
+        getReconnectDialogConfiguration().setReconnectInterval(1000);
+
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.setWidth("100%");
         horizontalLayout.setSpacing(false);
         setContent(horizontalLayout);
 
-        Resources<Company> companies = companyService.findAll();
+        Resources<Company> companies = Services.getCompanyService().findAll();
         companies.getContent().stream()
                 .map(company -> company.getTwitterUsername())
                 .map(twitterUsername -> Timeline.profile(twitterUsername))
