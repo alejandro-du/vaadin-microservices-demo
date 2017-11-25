@@ -1,0 +1,12 @@
+server.port: 8080
+server.session.cookie.name: NEWS-SESSION
+
+spring.application.name: news-application
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/
+    registryFetchIntervalSeconds: 1
+  instance:
+    leaseRenewalIntervalInSeconds: 1

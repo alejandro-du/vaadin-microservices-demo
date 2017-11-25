@@ -12,7 +12,9 @@
         <module>discovery-server</module>
         <module>config-server</module>
         <module>biz-application</module>
+        <module>news-application</module>
         <module>admin-application</module>
+        <module>website-application</module>
         <module>proxy-server</module>
     </modules>
 

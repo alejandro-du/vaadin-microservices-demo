@@ -5,7 +5,7 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.UI;
 import org.vaadin.crudui.crud.impl.GridCrud;
 
-@SpringUI
+@SpringUI()
 public class VaadinUI extends UI {
 
     @Override

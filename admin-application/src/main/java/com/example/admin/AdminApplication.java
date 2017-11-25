@@ -18,6 +18,9 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.session.hazelcast.HazelcastSessionRepository;
 import org.springframework.session.hazelcast.PrincipalNameExtractor;
 import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
+import org.springframework.session.web.http.CookieSerializer;
+import org.springframework.session.web.http.DefaultCookieSerializer;
+import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootApplication
 @EnableVaadin
@@ -35,8 +38,10 @@ public class AdminApplication {
     }
 
     @Bean
-    public ServletRegistrationBean<SpringVaadinServlet> springVaadinServlet() {
-        ServletRegistrationBean<SpringVaadinServlet> registrationBean = new ServletRegistrationBean<>(new SpringVaadinServlet(), "/*");
+    public ServletRegistrationBean<SpringVaadinServlet> springVaadinServlet(WebApplicationContext applicationContext) {
+        SpringVaadinServlet servlet = new SpringVaadinServlet();
+        servlet.setServiceUrlPath(applicationContext.getServletContext().getContextPath());
+        ServletRegistrationBean<SpringVaadinServlet> registrationBean = new ServletRegistrationBean<>(servlet, "/*");
         registrationBean.setLoadOnStartup(1);
         return registrationBean;
     }
@@ -54,6 +59,15 @@ public class AdminApplication {
                 .addMapIndexConfig(new MapIndexConfig(HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE, false));
 
         return Hazelcast.newHazelcastInstance(config);
+    }
+
+    @Bean
+    public CookieSerializer cookieSerializer() {
+        DefaultCookieSerializer serializer = new DefaultCookieSerializer();
+        serializer.setCookieName("ADMIN-SESSION");
+        serializer.setCookiePath("/");
+        serializer.setDomainNamePattern("^.+?\\.(\\w+\\.[a-z]+)$");
+        return serializer;
     }
 
 }

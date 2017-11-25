@@ -1,0 +1,25 @@
+server.port: 8080
+
+ribbon:
+  serverListRefreshInterval: 1000
+  ConnectTimeout: 6000
+  ReadTimeout: 3000
+  SocketTimeout: 6000
+
+zuul:
+  ignoredServices: '*'
+  routes:
+    website-application:
+      path: /**
+      serviceId: website-application
+      sensitiveHeaders:
+    news-application:
+      path: /news/**
+      serviceId: news-application
+      stripPrefix: true
+      sensitiveHeaders:
+    admin-application:
+      path: /admin/**
+      serviceId: admin-application
+      stripPrefix: true
+      sensitiveHeaders:
