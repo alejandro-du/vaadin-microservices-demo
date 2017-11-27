@@ -79,8 +79,10 @@ You can horizontally scale the system by starting more instances of the `biz-app
 
 **4) Test high-availability.**
 
-Make sure you running two instances of the `admin-application`. Click the _+_ (Add) button and enter `Vaadin`
-as the _name_, and `vaadin` as the _Twitter Username_. Don't click the _Add_ button yet. The web application should remain functional and save the data you entered without losing the state of the UI thanks to the externalized HTTP Session (implemented with Spring Session and Hazelcast).
+Make sure you are running two instances of the `admin-application`. Click the _+_ (Add) button and enter `Vaadin`
+as the _name_, and `vaadin` as the _Twitter Username_. Don't click the _Add_ button yet.
+
+Stop one of the instences of the `admin-application` and click the _Add_ button. The web application should remain functional and save the data you entered without losing the state of the UI thanks to the externalized HTTP Session (implemented with Spring Session and Hazelcast).
 
 **5) Test system resilience.**
 
