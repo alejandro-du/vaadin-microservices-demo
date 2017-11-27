@@ -1,10 +1,7 @@
 package com.example.admin;
 
-import com.vaadin.ui.Notification;
 import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
 
 /**
  * @author Alejandro Duarte.
@@ -14,8 +11,7 @@ public class CompanyServiceFallback implements CompanyService {
 
     @Override
     public Resources<Company> findAll() {
-        Notification.show("Operation not available. Please try again later.", Notification.Type.ERROR_MESSAGE);
-        return new Resources<>(Collections.emptyList());
+        return null;
     }
 
     @Override

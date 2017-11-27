@@ -18,10 +18,10 @@ public class VaadinUI extends UI {
         getReconnectDialogConfiguration().setDialogText("Please wait...");
         getReconnectDialogConfiguration().setReconnectInterval(1000);
 
-        BrowserFrame news = new BrowserFrame("News", new ExternalResource("http://localhost:8080/news"));
+        BrowserFrame news = new BrowserFrame("News", new ExternalResource("http://localhost:8080/news/twitter"));
         news.setSizeFull();
 
-        BrowserFrame admin = new BrowserFrame("Admin", new ExternalResource("http://localhost:8080/admin"));
+        BrowserFrame admin = new BrowserFrame("Admin", new ExternalResource("http://localhost:8080/admin/companies"));
         admin.setSizeFull();
 
         HorizontalSplitPanel mainLayout = new HorizontalSplitPanel(admin, news);

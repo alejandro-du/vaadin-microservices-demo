@@ -16,10 +16,8 @@ zuul:
     news-application:
       path: /news/**
       serviceId: news-application
-      stripPrefix: true
       sensitiveHeaders:
     admin-application:
       path: /admin/**
       serviceId: admin-application
-      stripPrefix: true
       sensitiveHeaders:

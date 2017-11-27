@@ -19,7 +19,6 @@ import org.springframework.session.hazelcast.PrincipalNameExtractor;
 import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
-import org.springframework.web.context.WebApplicationContext;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -36,9 +35,8 @@ public class AdminApplication {
     }
 
     @Bean
-    public ServletRegistrationBean<SpringVaadinServlet> springVaadinServlet(WebApplicationContext applicationContext) {
+    public ServletRegistrationBean<SpringVaadinServlet> springVaadinServlet() {
         SpringVaadinServlet servlet = new SpringVaadinServlet();
-        servlet.setServiceUrlPath(applicationContext.getServletContext().getContextPath());
         ServletRegistrationBean<SpringVaadinServlet> registrationBean = new ServletRegistrationBean<>(servlet, "/*");
         registrationBean.setLoadOnStartup(1);
         return registrationBean;
@@ -52,9 +50,10 @@ public class AdminApplication {
 
         Config config = new Config();
         config.setProperty("hazelcast.max.no.heartbeat.seconds", hazelcastHearbeat)
-                .getMapConfig("spring:session:sessions:admin-application")
+                .getMapConfig("spring:session:sessions")
                 .addMapAttributeConfig(attributeConfig)
                 .addMapIndexConfig(new MapIndexConfig(HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE, false));
+        config.getGroupConfig().setName(AdminApplication.class.getSimpleName());
 
         return Hazelcast.newHazelcastInstance(config);
     }
