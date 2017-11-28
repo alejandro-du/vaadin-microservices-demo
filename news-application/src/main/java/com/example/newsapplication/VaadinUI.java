@@ -10,7 +10,7 @@ import org.vaadin.addon.twitter.Timeline;
 /**
  * @author Alejandro Duarte.
  */
-@SpringUI(path = "/twitter")
+@SpringUI(path = "/")
 public class VaadinUI extends UI {
 
     @Override

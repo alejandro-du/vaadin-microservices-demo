@@ -37,8 +37,9 @@ public class AdminApplication {
     @Bean
     public ServletRegistrationBean<SpringVaadinServlet> springVaadinServlet() {
         SpringVaadinServlet servlet = new SpringVaadinServlet();
-        ServletRegistrationBean<SpringVaadinServlet> registrationBean = new ServletRegistrationBean<>(servlet, "/*");
+        ServletRegistrationBean<SpringVaadinServlet> registrationBean = new ServletRegistrationBean<>(servlet, "/companies/*");
         registrationBean.setLoadOnStartup(1);
+        registrationBean.setName("VaadinServlet");
         return registrationBean;
     }
 

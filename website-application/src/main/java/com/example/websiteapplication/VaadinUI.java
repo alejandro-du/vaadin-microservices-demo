@@ -10,7 +10,7 @@ import com.vaadin.ui.UI;
 /**
  * @author Alejandro Duarte.
  */
-@SpringUI
+@SpringUI(path = "/")
 public class VaadinUI extends UI {
 
     @Override

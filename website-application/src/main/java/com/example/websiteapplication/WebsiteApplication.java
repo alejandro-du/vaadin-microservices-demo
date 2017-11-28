@@ -31,8 +31,9 @@ public class WebsiteApplication {
     @Bean
     public ServletRegistrationBean<SpringVaadinServlet> springVaadinServlet() {
         SpringVaadinServlet servlet = new SpringVaadinServlet();
-        ServletRegistrationBean<SpringVaadinServlet> registrationBean = new ServletRegistrationBean<>(servlet, "/*");
+        ServletRegistrationBean<SpringVaadinServlet> registrationBean = new ServletRegistrationBean<>(servlet, "/website/*");
         registrationBean.setLoadOnStartup(1);
+        registrationBean.setName("VaadinServlet");
         return registrationBean;
     }
 

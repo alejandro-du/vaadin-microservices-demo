@@ -15,7 +15,7 @@ import org.vaadin.crudui.layout.impl.VerticalCrudLayout;
 import java.util.Collection;
 import java.util.Collections;
 
-@SpringUI(path = "/companies")
+@SpringUI(path = "/")
 public class VaadinUI extends UI implements CrudListener<Company> {
 
     private GridCrud<Company> crud = new GridCrud<>(Company.class, new VerticalCrudLayout());
