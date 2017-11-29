@@ -1,5 +1,7 @@
 server.port: 8080
 
+endpoints.health.enabled: true
+
 ribbon:
   serverListRefreshInterval: 1000
   ConnectTimeout: 6000

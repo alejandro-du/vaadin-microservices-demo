@@ -16,6 +16,7 @@
         <module>admin-application</module>
         <module>website-application</module>
         <module>proxy-server</module>
+        <module>monitor-application</module>
     </modules>
 
 </project>

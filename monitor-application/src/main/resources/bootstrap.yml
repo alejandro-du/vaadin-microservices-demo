@@ -1,0 +1,9 @@
+spring.application.name: monitor-application
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/
+    registryFetchIntervalSeconds: 1
+  instance:
+    leaseRenewalIntervalInSeconds: 1

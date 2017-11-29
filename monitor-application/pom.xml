@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>admin-application</artifactId>
+    <artifactId>monitor-application</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>admin-application</name>
+    <name>monitor-application</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -22,13 +22,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Finchley.M4</spring-cloud.version>
-        <vaadin.version>8.1.6</vaadin.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -36,47 +35,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-hateoas</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.vaadin</groupId>
-            <artifactId>vaadin-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-hazelcast</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.vaadin.crudui</groupId>
-            <artifactId>crudui</artifactId>
-            <version>2.1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.8.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-validation_1.0_spec</artifactId>
-            <version>1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.bval</groupId>
-            <artifactId>org.apache.bval.bundle</artifactId>
-            <version>1.1.2</version>
+            <artifactId>spring-cloud-starter-netflix-turbine</artifactId>
         </dependency>
 
         <dependency>
@@ -97,13 +60,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.vaadin</groupId>
-                <artifactId>vaadin-bom</artifactId>
-                <version>${vaadin.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -135,10 +91,6 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
-        <repository>
-            <id>vaadin-addons</id>
-            <url>http://maven.vaadin.com/vaadin-addons</url>
         </repository>
     </repositories>
 
