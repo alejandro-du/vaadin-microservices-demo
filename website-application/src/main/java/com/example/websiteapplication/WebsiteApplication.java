@@ -48,7 +48,7 @@ public class WebsiteApplication {
                 .getMapConfig("spring:session:sessions")
                 .addMapAttributeConfig(attributeConfig)
                 .addMapIndexConfig(new MapIndexConfig(HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE, false));
-        config.getGroupConfig().setName(WebsiteApplication.class.getSimpleName());
+        config.getGroupConfig().setName("website");
 
         return Hazelcast.newHazelcastInstance(config);
     }

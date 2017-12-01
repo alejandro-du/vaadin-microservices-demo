@@ -56,7 +56,7 @@ public class AdminApplication {
                 .getMapConfig("spring:session:sessions")
                 .addMapAttributeConfig(attributeConfig)
                 .addMapIndexConfig(new MapIndexConfig(HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE, false));
-        config.getGroupConfig().setName(AdminApplication.class.getSimpleName());
+        config.getGroupConfig().setName("admin");
 
         return Hazelcast.newHazelcastInstance(config);
     }

@@ -4,7 +4,7 @@ spring.application.name: discovery-server
 eureka:
   instance:
     hostname: localhost
-    leaseRenewalIntervalInSeconds: 1
+    leaseRenewalIntervalInSeconds: 2
     leaseExpirationDurationInSeconds: 2
   server:
     evictionIntervalTimerInMs: 1000
