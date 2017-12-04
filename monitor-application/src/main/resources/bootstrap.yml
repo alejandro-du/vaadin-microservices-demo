@@ -1,4 +1,9 @@
-spring.application.name: monitor-application
+spring:
+  application.name: monitor-application
+  cloud.config:
+    discovery:
+      enabled: true
+      serviceId: config-server
 
 eureka:
   client:

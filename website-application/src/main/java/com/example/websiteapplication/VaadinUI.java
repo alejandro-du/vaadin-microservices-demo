@@ -6,6 +6,7 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.BrowserFrame;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.UI;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @author Alejandro Duarte.
@@ -13,15 +14,21 @@ import com.vaadin.ui.UI;
 @SpringUI(path = "/")
 public class VaadinUI extends UI {
 
+    @Value("${news-application.url}")
+    private String newsUrl;
+
+    @Value("${admin-application.url}")
+    private String adminUrl;
+
     @Override
     protected void init(VaadinRequest request) {
         getReconnectDialogConfiguration().setDialogText("Please wait...");
         getReconnectDialogConfiguration().setReconnectInterval(1000);
 
-        BrowserFrame news = new BrowserFrame("News", new ExternalResource("http://localhost:8080/news/twitter"));
+        BrowserFrame news = new BrowserFrame("News", new ExternalResource(newsUrl));
         news.setSizeFull();
 
-        BrowserFrame admin = new BrowserFrame("Admin", new ExternalResource("http://localhost:8080/admin/companies"));
+        BrowserFrame admin = new BrowserFrame("Admin", new ExternalResource(adminUrl));
         admin.setSizeFull();
 
         HorizontalSplitPanel mainLayout = new HorizontalSplitPanel(admin, news);

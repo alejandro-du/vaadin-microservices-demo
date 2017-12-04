@@ -1,6 +1,11 @@
 package com.example.admin;
 
+import com.vaadin.spring.server.SpringVaadinServlet;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import javax.servlet.ServletContext;
 
 /**
  * @author Alejandro Duarte.
@@ -8,14 +13,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class Services {
 
-    private static CompanyService companyService;
-
-    public Services(CompanyService companyService) {
-        this.companyService = companyService;
-    }
 
     public static CompanyService getCompanyService() {
-        return companyService;
+        return getApplicationContext().getBean(CompanyService.class);
+    }
+
+    public static ApplicationContext getApplicationContext() {
+        ServletContext servletContext = SpringVaadinServlet.getCurrent().getServletContext();
+        return WebApplicationContextUtils.getWebApplicationContext(servletContext);
     }
 
 }

@@ -1,4 +1,9 @@
-spring.application.name: biz-application
+spring:
+  application.name: biz-application
+  cloud.config:
+    discovery:
+      enabled: true
+      serviceId: config-server
 
 eureka:
   client:

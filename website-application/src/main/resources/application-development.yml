@@ -7,3 +7,7 @@ eureka.client:
     fetchRegistry: false
 
 hazelcast.max.no.heartbeat.seconds: 60
+
+admin-application.url: http://localhost:8080/admin/companies
+
+news-application.url: http://localhost:8080/news/twitter

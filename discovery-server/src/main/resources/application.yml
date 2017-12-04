@@ -3,12 +3,11 @@ spring.application.name: discovery-server
 
 eureka:
   instance:
-    hostname: localhost
     leaseRenewalIntervalInSeconds: 2
     leaseExpirationDurationInSeconds: 2
   server:
-    evictionIntervalTimerInMs: 1000
-    response-cache-update-interval-ms: 1000
+    evictionIntervalTimerInMs: 2000
+    response-cache-update-interval-ms: 2000
   client:
     registerWithEureka: false
     fetchRegistry: false

@@ -1,4 +1,9 @@
-spring.application.name: website-application
+spring:
+  application.name: website-application
+  cloud.config:
+    discovery:
+      enabled: true
+      serviceId: config-server
 
 eureka:
   client:

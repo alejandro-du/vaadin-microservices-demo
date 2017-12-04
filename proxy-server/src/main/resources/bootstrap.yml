@@ -1,4 +1,9 @@
-spring.application.name: proxy-server
+spring:
+  application.name: proxy-server
+  cloud.config:
+    discovery:
+      enabled: true
+      serviceId: config-server
 
 eureka:
   client:

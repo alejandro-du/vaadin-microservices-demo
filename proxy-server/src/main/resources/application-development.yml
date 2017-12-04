@@ -23,3 +23,7 @@ zuul:
       path: /admin/**
       serviceId: admin-application
       sensitiveHeaders:
+
+website-application.ribbon.NFLoadBalancerRuleClassName: com.example.StickySessionRule
+admin-application.ribbon.NFLoadBalancerRuleClassName: com.example.StickySessionRule
+news-application.ribbon.NFLoadBalancerRuleClassName: com.example.StickySessionRule

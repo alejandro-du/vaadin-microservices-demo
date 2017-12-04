@@ -1,6 +1,11 @@
 server.port: 8080
 
-spring.application.name: news-application
+spring:
+  application.name: news-application
+  cloud.config:
+    discovery:
+      enabled: true
+      serviceId: config-server
 
 eureka:
   client:

@@ -1,8 +1,10 @@
-server.port: 8888
+server.port: 8001
 
 spring:
-  application.name: configserver
-  cloud.config.server.git.uri: file://${user.home}/vaadin-microservices-demo-config
+  application.name: config-server
+  cloud.config.server.git:
+    uri: file://${user.home}/vaadin-microservices-demo-config
+    label: master
 
 eureka:
   client:
