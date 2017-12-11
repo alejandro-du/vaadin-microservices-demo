@@ -2,7 +2,9 @@ server.port: 8080
 
 endpoints.health.enabled: true
 
-spring.cloud.config.enabled: false
+spring:
+  application.name: admin-application
+  cloud.config.discovery.enabled: false
 
 eureka.client:
     registerWithEureka: false

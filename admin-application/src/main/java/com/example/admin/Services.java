@@ -13,7 +13,6 @@ import javax.servlet.ServletContext;
 @Service
 public class Services {
 
-
     public static CompanyService getCompanyService() {
         return getApplicationContext().getBean(CompanyService.class);
     }
