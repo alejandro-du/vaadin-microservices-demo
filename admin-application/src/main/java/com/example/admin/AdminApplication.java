@@ -30,7 +30,7 @@ import org.springframework.session.web.http.DefaultCookieSerializer;
 public class AdminApplication {
 
     @Value("${hazelcast.max.no.heartbeat.seconds:60}")
-    private String hazelcastHearbeat;
+    private String hazelcastHeartbeat;
 
     public static void main(String... args) {
         SpringApplication.run(AdminApplication.class, args);
@@ -52,7 +52,7 @@ public class AdminApplication {
                 .setExtractor(PrincipalNameExtractor.class.getName());
 
         Config config = new Config();
-        config.setProperty("hazelcast.max.no.heartbeat.seconds", hazelcastHearbeat)
+        config.setProperty("hazelcast.max.no.heartbeat.seconds", hazelcastHeartbeat)
                 .getMapConfig("spring:session:sessions")
                 .addMapAttributeConfig(attributeConfig)
                 .addMapIndexConfig(new MapIndexConfig(HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE, false));
