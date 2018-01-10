@@ -20,6 +20,9 @@ public class VaadinUI extends UI {
     @Value("${admin-application.url}")
     private String adminUrl;
 
+    @Value("${ui.split.position:30}")
+    private int uiSplitPosition;
+
     @Override
     protected void init(VaadinRequest request) {
         getReconnectDialogConfiguration().setDialogText("Please wait...");
@@ -32,7 +35,7 @@ public class VaadinUI extends UI {
         admin.setSizeFull();
 
         HorizontalSplitPanel mainLayout = new HorizontalSplitPanel(admin, news);
-        mainLayout.setSplitPosition(30);
+        mainLayout.setSplitPosition(uiSplitPosition);
         mainLayout.setSizeFull();
 
         setContent(mainLayout);
