@@ -8,7 +8,6 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.hateoas.Resources;
-import org.vaadin.crudui.crud.CrudListener;
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.layout.impl.VerticalCrudLayout;
 
@@ -16,7 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @SpringUI(path = "/")
-public class VaadinUI extends UI implements CrudListener<Company> {
+public class VaadinUI extends UI {
 
     private GridCrud<Company> crud = new GridCrud<>(Company.class, new VerticalCrudLayout());
 
@@ -33,7 +32,10 @@ public class VaadinUI extends UI implements CrudListener<Company> {
         crud.getCrudFormFactory().setUseBeanValidation(true);
         crud.setClickRowToUpdate(true);
         crud.setUpdateOperationVisible(false);
-        crud.setCrudListener(this);
+        crud.setFindAllOperation(this::findAll);
+        crud.setAddOperation(company -> Services.getCompanyService().add(company));
+        crud.setUpdateOperation(company -> Services.getCompanyService().update(company.getId(), company));
+        crud.setDeleteOperation(company -> Services.getCompanyService().delete(company.getId()));
 
         VerticalLayout mainLayout = new VerticalLayout(title, crud);
         mainLayout.setHeightUndefined();
@@ -41,8 +43,7 @@ public class VaadinUI extends UI implements CrudListener<Company> {
         setContent(mainLayout);
     }
 
-    @Override
-    public Collection<Company> findAll() {
+    private Collection<Company> findAll() {
         Resources<Company> resources = Services.getCompanyService().findAll();
 
         Collection<Company> companies = Collections.emptyList();
@@ -57,21 +58,6 @@ public class VaadinUI extends UI implements CrudListener<Company> {
         }
 
         return companies;
-    }
-
-    @Override
-    public Company add(Company company) {
-        return Services.getCompanyService().add(company);
-    }
-
-    @Override
-    public Company update(Company company) {
-        return Services.getCompanyService().update(company.getId(), company);
-    }
-
-    @Override
-    public void delete(Company company) {
-        Services.getCompanyService().delete(company.getId());
     }
 
 }
