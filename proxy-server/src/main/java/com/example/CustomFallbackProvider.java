@@ -1,6 +1,6 @@
 package com.example;
 
-import org.springframework.cloud.netflix.zuul.filters.route.ZuulFallbackProvider;
+import org.springframework.cloud.netflix.zuul.filters.route.FallbackProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +15,8 @@ import java.io.InputStream;
  * @author Alejandro Duarte.
  */
 @Component
-public class FallbackProvider implements ZuulFallbackProvider {
+public class CustomFallbackProvider implements FallbackProvider {
+
     @Override
     public String getRoute() {
         return "admin-application";
@@ -25,17 +26,17 @@ public class FallbackProvider implements ZuulFallbackProvider {
     public ClientHttpResponse fallbackResponse() {
         return new ClientHttpResponse() {
             @Override
-            public HttpStatus getStatusCode() throws IOException {
+            public HttpStatus getStatusCode() {
                 return HttpStatus.NOT_FOUND;
             }
 
             @Override
-            public int getRawStatusCode() throws IOException {
+            public int getRawStatusCode() {
                 return getStatusCode().value();
             }
 
             @Override
-            public String getStatusText() throws IOException {
+            public String getStatusText() {
                 return getStatusCode().getReasonPhrase();
             }
 
@@ -44,7 +45,7 @@ public class FallbackProvider implements ZuulFallbackProvider {
             }
 
             @Override
-            public InputStream getBody() throws IOException {
+            public InputStream getBody() {
                 return new ByteArrayInputStream("Server not available. Please, try again later.".getBytes());
             }
 
@@ -55,6 +56,11 @@ public class FallbackProvider implements ZuulFallbackProvider {
                 return headers;
             }
         };
+    }
+
+    @Override
+    public ClientHttpResponse fallbackResponse(Throwable ignored) {
+        return fallbackResponse();
     }
 
 }
