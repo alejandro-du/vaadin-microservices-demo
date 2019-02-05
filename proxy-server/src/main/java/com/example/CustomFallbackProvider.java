@@ -8,7 +8,6 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -23,7 +22,7 @@ public class CustomFallbackProvider implements FallbackProvider {
     }
 
     @Override
-    public ClientHttpResponse fallbackResponse() {
+    public ClientHttpResponse fallbackResponse(String route, Throwable cause) {
         return new ClientHttpResponse() {
             @Override
             public HttpStatus getStatusCode() {
@@ -56,11 +55,6 @@ public class CustomFallbackProvider implements FallbackProvider {
                 return headers;
             }
         };
-    }
-
-    @Override
-    public ClientHttpResponse fallbackResponse(Throwable ignored) {
-        return fallbackResponse();
     }
 
 }

@@ -2,8 +2,6 @@ server.port: 8080
 
 spring.cloud.config.enabled: false
 
-endpoints.health.enabled: true
-
 turbine:
   appConfig: biz-application, admin-application, news-application, proxy-server
   clusterNameExpression: "'default'"

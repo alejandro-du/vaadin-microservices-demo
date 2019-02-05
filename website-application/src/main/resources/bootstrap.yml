@@ -12,3 +12,6 @@ eureka:
     registryFetchIntervalSeconds: 1
   instance:
     leaseRenewalIntervalInSeconds: 1
+
+vaadin.urlMapping: /website/*
+server.servlet.context-path: /

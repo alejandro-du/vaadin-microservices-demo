@@ -1,12 +1,10 @@
 package com.example.admin;
 
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Route;
 import org.springframework.hateoas.Resources;
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.layout.impl.VerticalCrudLayout;
@@ -14,18 +12,16 @@ import org.vaadin.crudui.layout.impl.VerticalCrudLayout;
 import java.util.Collection;
 import java.util.Collections;
 
-@SpringUI(path = "/")
-public class VaadinUI extends UI {
+@Route("")
+public class AdminView extends VerticalLayout {
 
     private GridCrud<Company> crud = new GridCrud<>(Company.class, new VerticalCrudLayout());
 
-    @Override
-    protected void init(VaadinRequest request) {
-        getReconnectDialogConfiguration().setDialogText("Please wait...");
-        getReconnectDialogConfiguration().setReconnectInterval(1000);
+    public AdminView() {
+        UI.getCurrent().getReconnectDialogConfiguration().setDialogText("Please wait...");
+        UI.getCurrent().getReconnectDialogConfiguration().setReconnectInterval(1000);
 
-        Label title = new Label("Companies");
-        title.addStyleName(ValoTheme.LABEL_H2);
+        H2 title = new H2("Companies");
 
         crud.getGrid().setColumns("name", "twitterUsername");
         crud.getCrudFormFactory().setVisibleProperties("name", "twitterUsername");
@@ -37,10 +33,9 @@ public class VaadinUI extends UI {
         crud.setUpdateOperation(company -> Services.getCompanyService().update(company.getId(), company));
         crud.setDeleteOperation(company -> Services.getCompanyService().delete(company.getId()));
 
-        VerticalLayout mainLayout = new VerticalLayout(title, crud);
-        mainLayout.setHeightUndefined();
-        mainLayout.setMargin(false);
-        setContent(mainLayout);
+        add(title, crud);
+        setMargin(false);
+        setHeight(null);
     }
 
     private Collection<Company> findAll() {
@@ -51,10 +46,10 @@ public class VaadinUI extends UI {
         if (resources != null) {
             companies = resources.getContent();
             if (!companies.isEmpty()) {
-                crud.getGrid().setHeightByRows(companies.size());
+                crud.getGrid().setHeightByRows(true);
             }
         } else {
-            Notification.show("An error occurred. Please try again later.", Notification.Type.ERROR_MESSAGE);
+            Notification.show("An error occurred. Please try again later.");
         }
 
         return companies;

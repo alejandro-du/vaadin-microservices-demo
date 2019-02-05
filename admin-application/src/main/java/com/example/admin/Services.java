@@ -1,6 +1,6 @@
 package com.example.admin;
 
-import com.vaadin.spring.server.SpringVaadinServlet;
+import com.vaadin.flow.spring.SpringServlet;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -18,7 +18,7 @@ public class Services {
     }
 
     public static ApplicationContext getApplicationContext() {
-        ServletContext servletContext = SpringVaadinServlet.getCurrent().getServletContext();
+        ServletContext servletContext = SpringServlet.getCurrent().getServletContext();
         return WebApplicationContextUtils.getWebApplicationContext(servletContext);
     }
 

@@ -3,6 +3,7 @@ package com.example.admin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Company implements Serializable {
 
@@ -20,16 +21,13 @@ public class Company implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Company company = (Company) o;
-
-        return id != null ? id.equals(company.id) : company.id == null;
-
+        return Objects.equals(id, company.id);
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return Objects.hash(id);
     }
 
     public Long getId() {

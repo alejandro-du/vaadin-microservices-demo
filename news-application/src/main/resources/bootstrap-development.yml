@@ -1,7 +1,5 @@
 server.port: 8080
 
-endpoints.health.enabled: true
-
 spring:
   application.name: news-application
   cloud.config.discovery.enabled: false

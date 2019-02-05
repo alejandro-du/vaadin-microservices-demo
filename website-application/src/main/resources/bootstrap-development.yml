@@ -1,0 +1,13 @@
+server.port: 8080
+
+spring.cloud.config.discovery.enabled: false
+
+eureka.client:
+    registerWithEureka: false
+    fetchRegistry: false
+
+hazelcast.max.no.heartbeat.seconds: 60
+
+admin-application.url: http://localhost:9401
+
+news-application.url: http://localhost:9201
