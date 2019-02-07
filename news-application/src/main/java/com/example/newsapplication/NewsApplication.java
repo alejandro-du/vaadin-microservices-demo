@@ -27,11 +27,6 @@ import org.springframework.session.hazelcast.config.annotation.web.http.EnableHa
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableCircuitBreaker
@@ -39,9 +34,6 @@ import java.io.IOException;
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @EnableHazelcastHttpSession
 public class NewsApplication {
-
-    @Value("${hazelcast.max.no.heartbeat.seconds:60}")
-    private String hazelcastHeartbeat;
 
     public static void main(String[] args) {
         SpringApplication.run(NewsApplication.class, args);
@@ -53,26 +45,13 @@ public class NewsApplication {
     }
 
     @Bean
-    public ServletRegistrationBean frontendServlet() {
-        ServletRegistrationBean servlet = new ServletRegistrationBean<>(new VaadinServlet() {
-            @Override
-            protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
-                    IOException {
-                if (!serveStaticOrWebJarRequest(req, resp)) {
-                    resp.sendError(404);
-                }
-            }
-        }, "/frontend/*");
-        servlet.setLoadOnStartup(1);
-        return servlet;
-    }
+    public ServletRegistrationBean<SpringServlet> springServlet(ApplicationContext applicationContext,
+            @Value("${vaadin.urlMapping}") String vaadinUrlMapping) {
 
-    @Bean
-    public ServletRegistrationBean<SpringServlet> springServlet(ApplicationContext applicationContext) {
         SpringServlet servlet = buildSpringServlet(applicationContext);
-        ServletRegistrationBean<SpringServlet> registrationBean = new ServletRegistrationBean<>(servlet, "/twitter/*");
+        ServletRegistrationBean<SpringServlet> registrationBean =
+                new ServletRegistrationBean<>(servlet, vaadinUrlMapping, "/frontend/*");
         registrationBean.setLoadOnStartup(1);
-        registrationBean.setName("VaadinServlet");
         registrationBean.addInitParameter(Constants.SERVLET_PARAMETER_SYNC_ID_CHECK, "false");
         return registrationBean;
     }
@@ -110,7 +89,9 @@ public class NewsApplication {
     }
 
     @Bean
-    public HazelcastInstance hazelcastInstance() {
+    public HazelcastInstance hazelcastInstance(
+            @Value("${hazelcast.max.no.heartbeat.seconds:60}") String hazelcastHeartbeat) {
+
         MapAttributeConfig attributeConfig =
                 new MapAttributeConfig().setName(HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE)
                         .setExtractor(PrincipalNameExtractor.class.getName());

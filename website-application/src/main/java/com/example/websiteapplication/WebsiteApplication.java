@@ -22,19 +22,11 @@ import org.springframework.session.hazelcast.config.annotation.web.http.EnableHa
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableHazelcastHttpSession
 @Controller
 public class WebsiteApplication {
-
-    @Value("${hazelcast.max.no.heartbeat.seconds:60}")
-    private String hazelcastHeartbeat;
 
     public static void main(String[] args) {
         SpringApplication.run(WebsiteApplication.class, args);
@@ -46,28 +38,15 @@ public class WebsiteApplication {
     }
 
     @Bean
-    public ServletRegistrationBean<SpringServlet> springServlet(ApplicationContext applicationContext) {
+    public ServletRegistrationBean<SpringServlet> springServlet(ApplicationContext applicationContext,
+            @Value("${vaadin.urlMapping}") String vaadinUrlMapping) {
+
         SpringServlet servlet = buildSpringServlet(applicationContext);
-        ServletRegistrationBean<SpringServlet> registrationBean = new ServletRegistrationBean<>(servlet, "/website/*");
+        ServletRegistrationBean<SpringServlet> registrationBean =
+                new ServletRegistrationBean<>(servlet, vaadinUrlMapping, "/frontend/*");
         registrationBean.setLoadOnStartup(1);
-        registrationBean.setName("VaadinServlet");
         registrationBean.addInitParameter(Constants.SERVLET_PARAMETER_SYNC_ID_CHECK, "false");
         return registrationBean;
-    }
-
-    @Bean
-    public ServletRegistrationBean frontendServlet() {
-        ServletRegistrationBean servlet = new ServletRegistrationBean<>(new VaadinServlet() {
-            @Override
-            protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException,
-                    IOException {
-                if (!serveStaticOrWebJarRequest(req, resp)) {
-                    resp.sendError(404);
-                }
-            }
-        }, "/frontend/*");
-        servlet.setLoadOnStartup(1);
-        return servlet;
     }
 
     private SpringServlet buildSpringServlet(ApplicationContext applicationContext) {
@@ -103,7 +82,9 @@ public class WebsiteApplication {
     }
 
     @Bean
-    public HazelcastInstance hazelcastInstance() {
+    public HazelcastInstance hazelcastInstance(
+            @Value("${hazelcast.max.no.heartbeat.seconds:60}") String hazelcastHeartbeat) {
+
         MapAttributeConfig attributeConfig =
                 new MapAttributeConfig().setName(HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE)
                         .setExtractor(PrincipalNameExtractor.class.getName());

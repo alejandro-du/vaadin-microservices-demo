@@ -40,7 +40,6 @@ public class AdminView extends VerticalLayout {
 
     private Collection<Company> findAll() {
         Resources<Company> resources = Services.getCompanyService().findAll();
-
         Collection<Company> companies = Collections.emptyList();
 
         if (resources != null) {
