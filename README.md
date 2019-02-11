@@ -30,25 +30,25 @@ java -jar target/config-server-0.0.1-SNAPSHOT.jar
 **3) Start an instance of the `biz-application` microservice (REST app):**
 ```
 cd vaadin-microservices-demo/biz-application
-java -Dserver.port=9601 -jar target/biz-application-0.0.1-SNAPSHOT.jar
+java -jar target/biz-application-0.0.1-SNAPSHOT.jar
 ```
 
 **4) Start an instance of the `admin-application` microservice (Vaadin app):**
 ```
 cd vaadin-microservices-demo/admin-application
-java -Dserver.port=9401 -jar target/admin-application-0.0.1-SNAPSHOT.jar
+java -jar target/admin-application-0.0.1-SNAPSHOT.jar
 ```
 
 **5) Start an instance of the `news-application` microservice (Vaadin app):**
 ```
 cd vaadin-microservices-demo/news-application
-java -Dserver.port=9201 -jar target/news-application-0.0.1-SNAPSHOT.jar
+java -jar target/news-application-0.0.1-SNAPSHOT.jar
 ```
 
 **6) Start an instance of the `website-application` microservice (Vaadin app):**
 ```
 cd vaadin-microservices-demo/website-application
-java -Dserver.port=9001 -jar target/website-application-0.0.1-SNAPSHOT.jar
+java -jar target/website-application-0.0.1-SNAPSHOT.jar
 ```
 
 **7) Start the `proxy-server` application (Zuul app):**
@@ -82,7 +82,7 @@ You can horizontally scale the system by starting more instances of the `biz-app
 Make sure you are running two instances of the `admin-application`. Click the _+_ (Add) button and enter `Vaadin`
 as the _name_, and `vaadin` as the _Twitter Username_. Don't click the _Add_ button yet.
 
-Stop one of the instences of the `admin-application` and click the _Add_ button. The web application should remain functional and save the data you entered without losing the state of the UI thanks to the externalized HTTP Session (implemented with Spring Session and Hazelcast).
+Stop one of the instances of the `admin-application` and click the _Add_ button. The web application should remain functional and save the data you entered without losing the state of the UI thanks to the externalized HTTP Session (implemented with Spring Session and Hazelcast).
 
 **5) Test system resilience.**
 
