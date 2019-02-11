@@ -6,6 +6,9 @@ spring:
     discovery:
       enabled: true
       serviceId: config-server
+    retry:
+      initialInterval: 2000
+      maxAttempts: 30
 
 eureka:
   client:
