@@ -1,4 +1,4 @@
-server.port: 8080
+server.port: 9301
 
 spring.cloud.config.discovery.enabled: false
 
@@ -8,6 +8,6 @@ eureka.client:
 
 hazelcast.max.no.heartbeat.seconds: 60
 
-admin-application.url: http://localhost:9401
+admin-application.url: http://localhost:9101
 
 news-application.url: http://localhost:9201

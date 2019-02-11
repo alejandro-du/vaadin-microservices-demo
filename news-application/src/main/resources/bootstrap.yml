@@ -1,4 +1,4 @@
-server.port: 8080
+server.port: 9201
 
 spring:
   application.name: news-application
@@ -10,7 +10,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:7001/eureka/
+      defaultZone: http://localhost:8001/eureka/
     registryFetchIntervalSeconds: 1
   instance:
     leaseRenewalIntervalInSeconds: 1

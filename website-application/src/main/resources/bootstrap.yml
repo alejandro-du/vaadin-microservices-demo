@@ -1,3 +1,5 @@
+server.port: 9301
+
 spring:
   application.name: website-application
   cloud.config:
@@ -8,7 +10,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:7001/eureka/
+      defaultZone: http://localhost:8001/eureka/
     registryFetchIntervalSeconds: 1
   instance:
     leaseRenewalIntervalInSeconds: 1

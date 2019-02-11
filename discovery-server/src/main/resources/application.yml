@@ -1,4 +1,4 @@
-server.port: 7001
+server.port: 8001
 spring.application.name: discovery-server
 
 eureka:
