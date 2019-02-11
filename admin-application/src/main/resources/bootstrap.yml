@@ -1,3 +1,5 @@
+server.port: 9101
+
 spring:
   application.name: admin-application
   cloud.config:

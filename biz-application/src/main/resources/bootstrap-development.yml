@@ -1,4 +1,4 @@
-server.port: 8080
+server.port: 9001
 
 spring:
   application.name: biz-application

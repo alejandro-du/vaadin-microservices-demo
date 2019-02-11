@@ -1,4 +1,4 @@
-server.port: 8080
+server.port: 9201
 
 spring:
   application.name: news-application

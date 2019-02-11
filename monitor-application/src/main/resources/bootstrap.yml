@@ -1,3 +1,5 @@
+server.port: 8601
+
 spring:
   application.name: monitor-application
   cloud.config:

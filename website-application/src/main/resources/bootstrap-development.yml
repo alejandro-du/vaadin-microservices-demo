@@ -1,4 +1,4 @@
-server.port: 8080
+server.port: 9301
 
 spring.cloud.config.discovery.enabled: false
 

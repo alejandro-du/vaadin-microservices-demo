@@ -1,3 +1,5 @@
+server.port: 9301
+
 spring:
   application.name: website-application
   cloud.config:
