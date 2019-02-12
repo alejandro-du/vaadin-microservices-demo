@@ -3,8 +3,8 @@ spring.application.name: discovery-server
 
 eureka:
   server:
-    evictionIntervalTimerInMs: 2000
-    response-cache-update-interval-ms: 2000
+    evictionIntervalTimerInMs: 3000
+    response-cache-update-interval-ms: 3000
   client:
     registerWithEureka: false
     fetchRegistry: false
