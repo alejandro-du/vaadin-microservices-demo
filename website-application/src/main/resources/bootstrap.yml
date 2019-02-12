@@ -6,6 +6,7 @@ spring:
     discovery:
       enabled: true
       serviceId: config-server
+    fail-fast: true
     retry:
       initialInterval: 2000
       maxAttempts: 30
