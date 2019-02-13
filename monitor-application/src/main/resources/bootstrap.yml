@@ -1,4 +1,4 @@
-server.port: 8601
+server.port: 8201
 
 spring:
   application.name: monitor-application
