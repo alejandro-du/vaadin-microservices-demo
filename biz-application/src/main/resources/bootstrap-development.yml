@@ -2,7 +2,9 @@ server.port: 9001
 
 spring:
   application.name: biz-application
-  cloud.config.discovery.enabled: false
+  cloud.config:
+    discovery.enabled: false
+    fail-fast: false
   jpa:
     hibernate.ddl-auto: update
     database-platform: org.hibernate.dialect.H2Dialect

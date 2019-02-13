@@ -2,12 +2,9 @@ server.port: 8001
 spring.application.name: discovery-server
 
 eureka:
-  instance:
-    leaseRenewalIntervalInSeconds: 2
-    leaseExpirationDurationInSeconds: 2
   server:
-    evictionIntervalTimerInMs: 2000
-    response-cache-update-interval-ms: 2000
+    evictionIntervalTimerInMs: 3000
+    response-cache-update-interval-ms: 3000
   client:
     registerWithEureka: false
     fetchRegistry: false

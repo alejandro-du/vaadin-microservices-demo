@@ -1,6 +1,8 @@
 server.port: 8201
 
-spring.cloud.config.enabled: false
+spring.cloud.config:
+    discovery.enabled: false
+    fail-fast: false
 
 turbine:
   appConfig: biz-application, admin-application, news-application, proxy-server

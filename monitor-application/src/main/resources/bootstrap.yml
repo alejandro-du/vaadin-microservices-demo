@@ -1,4 +1,4 @@
-server.port: 8601
+server.port: 8201
 
 spring:
   application.name: monitor-application
@@ -6,6 +6,10 @@ spring:
     discovery:
       enabled: true
       serviceId: config-server
+    fail-fast: true
+    retry:
+      initialInterval: 2000
+      maxAttempts: 30
 
 eureka:
   client:

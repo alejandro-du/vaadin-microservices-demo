@@ -33,8 +33,8 @@ public class WebsiteApplication {
     }
 
     @RequestMapping(value = "/")
-    public String forward() {
-        return "forward:/website/";
+    public String forward(@Value("${vaadin.url}") String vaadinUrl) {
+        return "forward:" +  vaadinUrl;
     }
 
     @Bean

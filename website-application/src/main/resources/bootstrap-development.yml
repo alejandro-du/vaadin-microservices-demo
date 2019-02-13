@@ -1,6 +1,8 @@
 server.port: 9301
 
-spring.cloud.config.discovery.enabled: false
+spring.cloud.config:
+    discovery.enabled: false
+    fail-fast: false
 
 eureka.client:
     registerWithEureka: false
@@ -8,6 +10,6 @@ eureka.client:
 
 hazelcast.max.no.heartbeat.seconds: 60
 
-admin-application.url: http://localhost:9101
+admin-application.url: http://localhost:9101/ui/
 
-news-application.url: http://localhost:9201
+news-application.url: http://localhost:9201/ui/
