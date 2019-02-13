@@ -1,5 +1,6 @@
 package com.example.newsapplication;
 
+import com.vaadin.flow.component.ReconnectDialogConfiguration;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
@@ -13,8 +14,9 @@ import org.vaadin.addon.twitter.Timeline;
 public class NewsView extends HorizontalLayout {
 
     public NewsView() {
-        UI.getCurrent().getReconnectDialogConfiguration().setDialogText("Please wait...");
-        UI.getCurrent().getReconnectDialogConfiguration().setReconnectInterval(1000);
+        ReconnectDialogConfiguration configuration = UI.getCurrent().getReconnectDialogConfiguration();
+        configuration.setDialogText("Please wait...");
+        configuration.setReconnectInterval(1000);
 
         setWidth("100%");
         setSpacing(false);

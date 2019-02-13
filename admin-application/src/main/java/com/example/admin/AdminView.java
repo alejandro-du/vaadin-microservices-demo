@@ -1,5 +1,6 @@
 package com.example.admin;
 
+import com.vaadin.flow.component.ReconnectDialogConfiguration;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.notification.Notification;
@@ -18,8 +19,9 @@ public class AdminView extends VerticalLayout {
     private GridCrud<Company> crud = new GridCrud<>(Company.class, new VerticalCrudLayout());
 
     public AdminView() {
-        UI.getCurrent().getReconnectDialogConfiguration().setDialogText("Please wait...");
-        UI.getCurrent().getReconnectDialogConfiguration().setReconnectInterval(1000);
+        ReconnectDialogConfiguration configuration = UI.getCurrent().getReconnectDialogConfiguration();
+        configuration.setDialogText("Please wait...");
+        configuration.setReconnectInterval(1000);
 
         H2 title = new H2("Companies");
 
