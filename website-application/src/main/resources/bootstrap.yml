@@ -19,5 +19,6 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
 
-vaadin.urlMapping: /website/*
+vaadin.url: /ui/
+vaadin.urlMapping: ${vaadin.url}*
 server.servlet.context-path: /

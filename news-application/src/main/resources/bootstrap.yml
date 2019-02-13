@@ -19,5 +19,5 @@ eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
 
-vaadin.urlMapping: /twitter/*
+vaadin.urlMapping: /ui/*
 server.servlet.context-path: /
