@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  discovery-server:
+    image: alejandrovaadin/microservices-discovery-server
+    ports:
+      - "8001:8080"
+  config-server:
+    image: alejandrovaadin/microservices-config-server
+    ports:
+      - "8101:8080"
+  biz-application:
+    image: alejandrovaadin/microservices-biz-application
+    ports:
+      - "9001:8080"
+    volumes:
+      - ~/h2-databases:/root/h2-databases
+  admin-application:
+    image: alejandrovaadin/microservices-admin-application
+    ports:
+      - "9101:8080"
+  news-application:
+    image: alejandrovaadin/microservices-news-application
+    ports:
+      - "9201:8080"
+  website-application:
+    image: alejandrovaadin/microservices-website-application
+    ports:
+      - "9301:8080"
+  proxy-server:
+    image: alejandrovaadin/microservices-proxy-server
+    ports:
+      - "8080:8080"
+  monitor-application:
+    image: alejandrovaadin/microservices-monitor-application
+    ports:
+      - "8201:8201"
