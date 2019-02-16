@@ -5,20 +5,36 @@ services:
     image: alejandrovaadin/microservices-discovery-server
     ports:
       - "8001:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
   config-server:
     image: alejandrovaadin/microservices-config-server
     ports:
       - "8101:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
   biz-application:
     image: alejandrovaadin/microservices-biz-application
     ports:
       - "9001:8080"
     volumes:
       - ~/h2-databases:/root/h2-databases
+    deploy:
+      resources:
+        limits:
+          memory: 128M
   admin-application:
     image: alejandrovaadin/microservices-admin-application
     ports:
       - "9101:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
   news-application:
     image: alejandrovaadin/microservices-news-application
     ports:
@@ -27,11 +43,23 @@ services:
     image: alejandrovaadin/microservices-website-application
     ports:
       - "9301:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
   proxy-server:
     image: alejandrovaadin/microservices-proxy-server
     ports:
       - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
   monitor-application:
     image: alejandrovaadin/microservices-monitor-application
     ports:
       - "8201:8201"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
