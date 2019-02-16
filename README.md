@@ -1,6 +1,8 @@
 # Microservices with Vaadin demo
 
-This demo shows a Microservices Architecture implemented with [Spring Cloud Netflix](http://cloud.spring.io/spring-cloud-netflix/) and [Vaadin](https://vaadin.com).
+A microservices demo implemented with [Spring Cloud Netflix](http://cloud.spring.io/spring-cloud-netflix/) and [Vaadin](https://vaadin.com).
+
+If you are using Vaadin 8, checkout the [vaadin-8](https://github.com/alejandro-du/vaadin-microservices-demo/tree/vaadin-8) branch. 
 
 ## Building the demo
 
@@ -98,6 +100,5 @@ For example, during development you can run the `biz-application` microservice u
 cd vaadin-microservices-demo/biz-application
 java -Dspring.profiles.active=development -jar target/biz-application-0.0.1-SNAPSHOT.jar
 ```
-
 
 With the `admin-application`, and `news-application` you need the REST web-service provided by the `biz-application`. You can either, run the `biz-application` in `development` mode or create a _mock_ REST web service. You can configure the end point with the `biz-application.url` property in the `application-development.properties`.
