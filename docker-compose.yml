@@ -2,7 +2,7 @@ version: '3'
 
 services:
   discovery-server:
-    image: alejandrovaadin/microservices-discovery-server
+    image: alejandrodu/microservices-discovery-server
     ports:
       - "8001:8080"
     deploy:
@@ -10,7 +10,7 @@ services:
         limits:
           memory: 128M
   config-server:
-    image: alejandrovaadin/microservices-config-server
+    image: alejandrodu/microservices-config-server
     ports:
       - "8101:8080"
     deploy:
@@ -18,7 +18,7 @@ services:
         limits:
           memory: 128M
   biz-application:
-    image: alejandrovaadin/microservices-biz-application
+    image: alejandrodu/microservices-biz-application
     ports:
       - "9001:8080"
     volumes:
@@ -28,7 +28,7 @@ services:
         limits:
           memory: 128M
   admin-application:
-    image: alejandrovaadin/microservices-admin-application
+    image: alejandrodu/microservices-admin-application
     ports:
       - "9101:8080"
     deploy:
@@ -36,11 +36,11 @@ services:
         limits:
           memory: 256M
   news-application:
-    image: alejandrovaadin/microservices-news-application
+    image: alejandrodu/microservices-news-application
     ports:
       - "9201:8080"
   website-application:
-    image: alejandrovaadin/microservices-website-application
+    image: alejandrodu/microservices-website-application
     ports:
       - "9301:8080"
     deploy:
@@ -48,7 +48,7 @@ services:
         limits:
           memory: 128M
   proxy-server:
-    image: alejandrovaadin/microservices-proxy-server
+    image: alejandrodu/microservices-proxy-server
     ports:
       - "8080:8080"
     deploy:
@@ -56,7 +56,7 @@ services:
         limits:
           memory: 128M
   monitor-application:
-    image: alejandrovaadin/microservices-monitor-application
+    image: alejandrodu/microservices-monitor-application
     ports:
       - "8201:8201"
     deploy:
