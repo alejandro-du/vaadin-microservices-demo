@@ -5,60 +5,79 @@ services:
     image: alejandrodu/microservices-discovery-server
     ports:
       - "8001:8080"
+    command: --logging.file=application.log
     deploy:
       resources:
         limits:
           memory: 128M
+
   config-server:
     image: alejandrodu/microservices-config-server
     ports:
       - "8101:8080"
+    command: --eureka.client.serviceUrl.defaultZone=http://discovery-server:8080/eureka/ --logging.file=application.log
     deploy:
       resources:
         limits:
           memory: 128M
+
   biz-application:
     image: alejandrodu/microservices-biz-application
     ports:
       - "9001:8080"
+    command: --eureka.client.serviceUrl.defaultZone=http://discovery-server:8080/eureka/ --logging.file=application.log
     volumes:
       - ~/h2-databases:/root/h2-databases
     deploy:
       resources:
         limits:
           memory: 128M
+
   admin-application:
     image: alejandrodu/microservices-admin-application
     ports:
       - "9101:8080"
+    command: --eureka.client.serviceUrl.defaultZone=http://discovery-server:8080/eureka/ --logging.file=application.log
     deploy:
       resources:
         limits:
           memory: 256M
+
   news-application:
     image: alejandrodu/microservices-news-application
     ports:
       - "9201:8080"
+    command: --eureka.client.serviceUrl.defaultZone=http://discovery-server:8080/eureka/ --logging.file=application.log
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
   website-application:
     image: alejandrodu/microservices-website-application
     ports:
       - "9301:8080"
+    command: --eureka.client.serviceUrl.defaultZone=http://discovery-server:8080/eureka/ --logging.file=application.log
     deploy:
       resources:
         limits:
           memory: 128M
+
   proxy-server:
     image: alejandrodu/microservices-proxy-server
     ports:
       - "8080:8080"
+    command: --eureka.client.serviceUrl.defaultZone=http://discovery-server:8080/eureka/ --logging.file=application.log
     deploy:
       resources:
         limits:
           memory: 128M
+
   monitor-application:
     image: alejandrodu/microservices-monitor-application
     ports:
       - "8201:8201"
+    command: --eureka.client.serviceUrl.defaultZone=http://discovery-server:8080/eureka/ --logging.file=application.log
     deploy:
       resources:
         limits:
