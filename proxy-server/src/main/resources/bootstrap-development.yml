@@ -1,5 +1,15 @@
 server.port: 8080
 
+spring:
+  application.name: proxy-server
+  cloud.config:
+    discovery.enabled: false
+    fail-fast: false
+
+eureka.client:
+  registerWithEureka: false
+  fetchRegistry: false
+
 ribbon:
   serverListRefreshInterval: 1000
   ConnectTimeout: 6000

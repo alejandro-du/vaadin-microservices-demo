@@ -1,5 +1,9 @@
 server.port: 8101
 
+eureka.client:
+  registerWithEureka: false
+  fetchRegistry: false
+
 spring:
   application.name: config-server
   cloud.config:
