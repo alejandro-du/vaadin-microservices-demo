@@ -20,7 +20,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
-import org.springframework.hateoas.hal.Jackson2HalModule;
+import org.springframework.hateoas.mediatype.hal.Jackson2HalModule;
 import org.springframework.session.hazelcast.HazelcastSessionRepository;
 import org.springframework.session.hazelcast.PrincipalNameExtractor;
 import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
@@ -57,7 +57,7 @@ public class NewsApplication {
     }
 
     private SpringServlet buildSpringServlet(ApplicationContext applicationContext) {
-        return new SpringServlet(applicationContext) {
+        return new SpringServlet(applicationContext, false) {
             @Override
             protected VaadinServletService createServletService(DeploymentConfiguration deploymentConfiguration) throws
                     ServiceException {

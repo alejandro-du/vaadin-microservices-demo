@@ -50,7 +50,7 @@ public class WebsiteApplication {
     }
 
     private SpringServlet buildSpringServlet(ApplicationContext applicationContext) {
-        return new SpringServlet(applicationContext) {
+        return new SpringServlet(applicationContext, false) {
             @Override
             protected VaadinServletService createServletService(DeploymentConfiguration deploymentConfiguration) throws
                     ServiceException {

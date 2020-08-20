@@ -2,7 +2,7 @@ package com.example.admin;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Primary;
-import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface CompanyService {
 
     @RequestMapping("/companies")
-    Resources<Company> findAll();
+    CollectionModel<Company> findAll();
 
     @RequestMapping(value = "/companies", method = RequestMethod.POST)
     Company add(@RequestBody Company company);

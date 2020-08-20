@@ -22,3 +22,9 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+### Vaadin ###
+node_modules/
+drivers/
+error-screenshots/
+webpack.generated.js

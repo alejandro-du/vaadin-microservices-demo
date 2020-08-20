@@ -1,6 +1,6 @@
 package com.example.admin;
 
-import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class CompanyServiceFallback implements CompanyService {
 
     @Override
-    public Resources<Company> findAll() {
+    public CollectionModel<Company> findAll() {
         return null;
     }
 

@@ -1,6 +1,6 @@
 package com.example.newsapplication;
 
-import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -12,8 +12,8 @@ import java.util.Arrays;
 public class CompanyServiceFallback implements CompanyService {
 
     @Override
-    public Resources<Company> findAll() {
-        return new Resources<>(Arrays.asList(new Company("vaadin"), new Company("pivotal"), new Company("netflix")));
+    public CollectionModel<Company> findAll() {
+        return CollectionModel.of(Arrays.asList(new Company("vaadin"), new Company("pivotal"), new Company("netflix")));
     }
 
 }

@@ -20,8 +20,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
-import org.springframework.hateoas.hal.Jackson2HalModule;
-import org.springframework.session.hazelcast.HazelcastSessionRepository;
+import org.springframework.hateoas.mediatype.hal.Jackson2HalModule;
+import org.springframework.session.hazelcast.HazelcastIndexedSessionRepository;
 import org.springframework.session.hazelcast.PrincipalNameExtractor;
 import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
 import org.springframework.session.web.http.CookieSerializer;
@@ -57,7 +57,7 @@ public class AdminApplication {
     }
 
     private SpringServlet buildSpringServlet(ApplicationContext applicationContext) {
-        return new SpringServlet(applicationContext) {
+        return new SpringServlet(applicationContext, false) {
             @Override
             protected VaadinServletService createServletService(DeploymentConfiguration deploymentConfiguration) throws
                     ServiceException {
@@ -93,14 +93,14 @@ public class AdminApplication {
             @Value("${hazelcast.max.no.heartbeat.seconds:60}") String hazelcastHeartbeat) {
 
         MapAttributeConfig attributeConfig =
-                new MapAttributeConfig().setName(HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE)
+                new MapAttributeConfig().setName(HazelcastIndexedSessionRepository.PRINCIPAL_NAME_ATTRIBUTE)
                         .setExtractor(PrincipalNameExtractor.class.getName());
 
         Config config = new Config();
         config.setProperty("hazelcast.max.no.heartbeat.seconds", hazelcastHeartbeat)
-                .getMapConfig(HazelcastSessionRepository.DEFAULT_SESSION_MAP_NAME)
+                .getMapConfig(HazelcastIndexedSessionRepository.DEFAULT_SESSION_MAP_NAME)
                 .addMapAttributeConfig(attributeConfig)
-                .addMapIndexConfig(new MapIndexConfig(HazelcastSessionRepository.PRINCIPAL_NAME_ATTRIBUTE, false));
+                .addMapIndexConfig(new MapIndexConfig(HazelcastIndexedSessionRepository.PRINCIPAL_NAME_ATTRIBUTE, false));
         config.getGroupConfig().setName("admin");
 
         return Hazelcast.newHazelcastInstance(config);

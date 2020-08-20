@@ -4,7 +4,7 @@ import com.vaadin.flow.component.ReconnectDialogConfiguration;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
-import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.CollectionModel;
 import org.vaadin.addon.twitter.Timeline;
 
 /**
@@ -21,7 +21,7 @@ public class NewsView extends HorizontalLayout {
         setWidth("100%");
         setSpacing(false);
 
-        Resources<Company> companies = Services.getCompanyService().findAll();
+        CollectionModel<Company> companies = Services.getCompanyService().findAll();
         companies.getContent()
                 .stream()
                 .map(company -> company.getTwitterUsername())

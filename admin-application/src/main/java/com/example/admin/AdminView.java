@@ -6,7 +6,8 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.CollectionModel;
+import org.vaadin.crudui.crud.CrudListener;
 import org.vaadin.crudui.crud.impl.GridCrud;
 import org.vaadin.crudui.layout.impl.VerticalCrudLayout;
 
@@ -14,7 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Route("")
-public class AdminView extends VerticalLayout {
+public class AdminView extends VerticalLayout implements CrudListener<Company> {
 
     private GridCrud<Company> crud = new GridCrud<>(Company.class, new VerticalCrudLayout());
 
@@ -31,17 +32,16 @@ public class AdminView extends VerticalLayout {
         crud.setClickRowToUpdate(true);
         crud.setUpdateOperationVisible(false);
         crud.setFindAllOperation(this::findAll);
-        crud.setAddOperation(company -> Services.getCompanyService().add(company));
-        crud.setUpdateOperation(company -> Services.getCompanyService().update(company.getId(), company));
-        crud.setDeleteOperation(company -> Services.getCompanyService().delete(company.getId()));
+        crud.setCrudListener(this);
 
         add(title, crud);
         setMargin(false);
         setHeight(null);
     }
 
-    private Collection<Company> findAll() {
-        Resources<Company> resources = Services.getCompanyService().findAll();
+    @Override
+    public Collection<Company> findAll() {
+        CollectionModel<Company> resources = Services.getCompanyService().findAll();
         Collection<Company> companies = Collections.emptyList();
 
         if (resources != null) {
@@ -54,6 +54,21 @@ public class AdminView extends VerticalLayout {
         }
 
         return companies;
+    }
+
+    @Override
+    public Company add(Company company) {
+        return Services.getCompanyService().add(company);
+    }
+
+    @Override
+    public Company update(Company company) {
+        return Services.getCompanyService().update(company.getId(), company);
+    }
+
+    @Override
+    public void delete(Company company) {
+        Services.getCompanyService().delete(company.getId());
     }
 
 }
