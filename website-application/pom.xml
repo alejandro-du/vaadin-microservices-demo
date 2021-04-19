@@ -16,7 +16,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
-        <vaadin.version>14.3.3</vaadin.version>
+        <vaadin.version>14.4.10</vaadin.version>
     </properties>
 
     <dependencies>
